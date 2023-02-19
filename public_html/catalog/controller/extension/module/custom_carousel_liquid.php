@@ -1,12 +1,17 @@
 <?php
 class ControllerExtensionModuleCustomCarouselLiquid extends Controller {
     public function index($setting) {
+        static $module = 0;
 
         $this->load->language('extension/module/custom_carousel_liquid');
 
         $this->load->model('catalog/product');
 
         $this->load->model('tool/image');
+
+        $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
+        $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+        $this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.min.js');
 
         $data['products'] = array();
 
@@ -68,7 +73,7 @@ class ControllerExtensionModuleCustomCarouselLiquid extends Controller {
                     'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
                 );
             }
-
+            $data['module'] = 'liqid' . $module++;
             return $this->load->view('extension/module/custom_carousel_liquid', $data);
         }
     }

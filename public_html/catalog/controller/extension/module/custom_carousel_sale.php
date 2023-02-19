@@ -1,12 +1,19 @@
 <?php
 class ControllerExtensionModuleCustomCarouselSale extends Controller {
     public function index($setting) {
+        static $module = 0;
 
         $this->load->language('extension/module/custom_carousel_sale');
 
         $this->load->model('catalog/product');
 
         $this->load->model('tool/image');
+
+
+        $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
+        $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+        $this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.min.js');
+
 
         $data['products'] = array();
 
@@ -67,6 +74,8 @@ class ControllerExtensionModuleCustomCarouselSale extends Controller {
                     'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
                 );
             }
+
+            $data['module'] = 'sale' . $module++;
 
             return $this->load->view('extension/module/custom_carousel_sale', $data);
         }
