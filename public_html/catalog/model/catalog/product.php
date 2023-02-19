@@ -286,8 +286,6 @@ class ModelCatalogProduct extends Model {
 
         $sql = "SELECT DISTINCT product_id FROM " . DB_PREFIX . "product_discount";
 
-        var_dump($sql);
-
         if (isset($data['start']) || isset($data['limit'])) {
             if ($data['start'] < 0) {
                 $data['start'] = 0;
@@ -300,7 +298,6 @@ class ModelCatalogProduct extends Model {
             $sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
         }
 
-        var_dump($sql);
         $product_data = array();
 
         $query = $this->db->query($sql);
